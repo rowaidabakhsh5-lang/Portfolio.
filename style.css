@@ -1,0 +1,1579 @@
+:root{
+  --bg:#faf3eb;
+
+  /* ===== الكروت ===== */
+  --cardW: 380px;
+  --cardH: 190px;
+  --boxW: 190px;
+  --radius: 0px;
+  --linePx: 16px;
+
+  /* ===== شريط علوي ===== */
+  --topbar-h: 64px;
+  --topbar-offset: 18px;
+
+  /* ===== تحكم حجم اللوقو ===== */
+  --logo-h: 50px;
+
+  /* ===== ألوان خطوط الهامبرغر ===== */
+  --ham-1: #e64329;
+  --ham-2: #f0d074;
+  --ham-3: #81c4aa;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; margin:0; }
+
+body{
+  background: var(--bg);
+       font-family: "Almarai", sans-serif;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  position: fixed;
+  top: var(--topbar-offset);
+  left: 0; right: 0;
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  z-index: 9999;
+  background: rgba(250,243,235,0.72);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  user-select:none;
+  cursor: pointer;
+}
+.logo img{
+  height: var(--logo-h);
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.menuWrap{ position: relative; }
+
+.hamburger{
+  width: 50px;
+  height: 50px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 0;
+}
+
+.hamburgerLines{
+  width: 28px;
+  height: 20px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburgerLines span{
+  display:block;
+  height: 3px;
+  border-radius: 0px;
+  transition: transform .25s ease, opacity .2s ease;
+}
+.hamburgerLines span:nth-child(1){ background: var(--ham-1); }
+.hamburgerLines span:nth-child(2){ background: var(--ham-2); }
+.hamburgerLines span:nth-child(3){ background: var(--ham-3); }
+
+.menuOpen .hamburgerLines span:nth-child(1){
+  transform: translateY(7px) rotate(45deg);
+}
+.menuOpen .hamburgerLines span:nth-child(2){ opacity: 0; }
+.menuOpen .hamburgerLines span:nth-child(3){
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.menu{
+  position: absolute;
+  top: 52px;
+  right: 0;
+  width: 190px;
+  background: rgba(250,243,235);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  box-shadow: 0 14px 38px rgba(0,0,0,0.18);
+  padding: 8px 0;
+  text-align: right;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.menuOpen .menu{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.menu a{
+   font-family: "Almarai", sans-serif;
+   font-weight: 550;
+  display:block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #111827;
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+}
+.menu a:hover{ background: rgba(0,0,0,0.05); }
+
+/* ===== المحتوى ===== */
+.content{
+  position: relative;
+  z-index: 1;
+  padding-top: calc(var(--topbar-h) + var(--topbar-offset));
+}
+
+/* الافتراضي: بقية السكاشن ممتدة */
+.pageGeneric{
+  min-height: 100vh;
+  padding: 56px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== الصفحة الأولى (الدرج فقط) ===== */
+.page1{
+  position: relative;
+  min-height: 100vh;
+  padding: 0;
+  overflow: hidden;
+}
+
+.page1 .stage{
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.page1 .stair{ position:absolute; inset:0; }
+
+/* ===== الكروت ===== */
+.wrap{
+  position:absolute;
+  width: calc(var(--cardW) + var(--boxW));
+  height: var(--cardH);
+  transform: translate3d(0,0,0);
+  will-change: transform;
+
+}
+
+.card{
+  position:absolute;
+  left:0; top:0;
+  width: var(--cardW);
+  height: var(--cardH);
+  border-radius: var(--radius);
+  overflow:hidden;
+  background:#ddd;
+  box-shadow: 0 12px 30px rgba(0,0,0,.18), 0 2px 8px rgba(0,0,0,.08);
+}
+
+.img{
+  position:absolute; inset:0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.02);
+}
+
+.box{
+  position:absolute;
+  left: var(--cardW);
+  top:0;
+  width: var(--boxW);
+  height: var(--cardH);
+  border-radius: var(--radius);
+  overflow:hidden;
+  background: rgba(209, 40, 40, 0.26);
+  border-left: 1px solid rgba(0,0,0,.08);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
+}
+
+.box svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  pointer-events:none;
+}
+
+/* خط مثل قبل */
+.box line{
+  stroke-width: var(--linePx);
+  stroke-linecap: square;
+}
+
+
+
+/* ===== الصفحة الثانية: صورة فقط ===== */
+.image-only{
+  min-height: 100vh;
+  padding: 56px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+
+}
+.image-only img{
+  width: 100%;
+  max-width: 1500px; /* صغرنا شوي على الكمبيوتر */
+  height: auto;
+  display:block;
+  object-fit: cover;
+
+}
+
+
+
+
+
+/* تعديل للجوال */
+@media (max-width: 768px){
+  .image-only img{
+    width: 110vw; /* جعل الصورة تملأ عرض الشاشة بالكامل */
+    height: 130px;
+    max-width: none; /* إزالة الحد السابق */
+    object-fit: cover;
+  }
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   ABOUT (DESKTOP)
+========================== */
+
+#about.pageGeneric{
+
+  --aboutCardMinH:700px;
+
+  --aboutVideoW:800px;
+  --aboutVideoH:910px;
+
+  background: rgb(250,243,235);
+  position:relative;
+}
+
+/* الكرت */
+#about.pageGeneric .aboutCard{
+
+  width:min(1600px,100%);
+  margin:auto;
+
+  background:rgba(255,255,255,0.55);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(0,0,0,0.06);
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+  border-radius:12px;
+
+
+  padding:40px;
+  min-height:var(--aboutCardMinH);
+
+  position:relative;
+  overflow:hidden;
+}
+
+/* النص */
+#about .aboutText{
+
+  font-family:"Almarai", sans-serif;
+  text-align:right;
+
+  max-width:450px;
+
+  /* يمنع النص من الركوب على الفيديو */
+  margin-left:var(--aboutVideoW);
+
+  position:relative;
+  z-index:2;
+}
+
+#about .aboutText h2{
+  font-size:32px;
+  margin-bottom:14px;
+}
+
+#about .aboutText p{
+  font-size:16px;
+  line-height:1.9;
+
+  direction: rtl;
+
+  text-align: right;
+
+  unicode-bidi: plaintext;
+
+
+}
+
+/* الفيديو */
+#about .aboutVideo{
+
+  position:absolute;
+  left:0;
+  bottom:0;
+
+  width:var(--aboutVideoW);
+  height:var(--aboutVideoH);
+
+  overflow:hidden;
+}
+
+#about .aboutVideo video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius: 20px;
+}
+
+
+/* ==========================
+   ABOUT (MOBILE)
+========================== */
+
+@media (max-width:768px){
+
+#about.pageGeneric{
+  --aboutMobileVideoH:400px;
+}
+
+/* الكرت */
+#about.pageGeneric .aboutCard{
+
+  display:flex;
+  flex-direction:column;
+
+  padding:20px 20px 0 0;
+  gap:22px;
+
+  min-height:auto;
+}
+
+/* النص */
+#about .aboutText{
+
+  width:100%;
+  margin:0;
+}
+
+/* الفيديو */
+#about .aboutVideo{
+
+  position:static;
+
+  width:100%;
+  height:var(--aboutMobileVideoH);
+
+  margin:auto 0 0 0;
+
+  align-self:center;
+
+  border-radius:12px;
+  overflow:hidden;
+
+
+}
+
+}
+
+/* ===== صفحة الأعمال ===== */
+.worksPage{
+  background: #faf3eb;
+  padding: 120px 40px 120px;
+}
+
+.worksTitle{
+  font-size: clamp(32px, 5vw, 64px);
+  margin: 0 0 40px 0;
+  text-align: center;
+}
+
+
+.workItem{
+  overflow: visible;
+}
+
+.workItem img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.15);
+}
+
+@media (max-width: 1024px){
+  .worksPage{ padding: 100px 24px 120px; }
+  .worksGrid{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+}
+
+@media (max-width: 600px){
+  .worksPage{ padding: 90px 16px 120px; }
+  .worksGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+}
+
+.workItem{
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.workItem img{
+  transform-origin: center center;
+  transition: transform 120ms linear;
+}
+
+@media (max-width: 768px){
+  .topbar{ padding: 0 14px; }
+
+  :root{
+    --cardW: 210px;
+    --cardH: 110px;
+    --boxW: 110px;
+    --linePx: 16px;
+  }
+
+  .page1{
+    height: 50vh;
+    min-height: 360px;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .page1 .stage{
+    inset: -160px;
+    overflow: hidden;
+  }
+
+  .box svg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    transform: none !important;
+  }
+
+  .box line{
+    vector-effect: non-scaling-stroke;
+  }
+
+  .image-only{
+    min-height: auto;
+    padding: 24px 16px;
+  }
+  .image-only img{
+    width: 100%;
+    max-width: 980px;
+    border-radius: 12px;
+  }
+
+  #about.pageGeneric{ min-height: auto; padding: 40px 16px; }
+
+  #about .aboutVideo video{
+    height: 400px;
+    min-height: 360px;
+    max-height: 720px;
+  }
+}
+
+/* ==========================
+   WORKS SECTION
+========================== */
+.worksSection{
+  min-height: auto;
+  padding: 56px 24px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.worksWrap{
+  width: min(1600px, 100%);
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+.worksTitle{
+     font-family: "Almarai", sans-serif;
+
+  margin: 0 0 18px;
+  font-size: clamp(22px, 3.2vw, 38px);
+  font-weight: 800;
+  text-align: right;
+}
+
+#works .worksGrid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+  align-items: start;
+}
+
+.workItem{
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.20);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+  transform: translate3d(0, var(--stagger, 0px), 0);
+  will-change: transform;
+}
+
+.workItem img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px){
+  .worksSection{
+    padding: 44px 16px;
+  }
+
+  #works .worksGrid{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .workItem:nth-child(2n){
+    --stagger: 18px;
+  }
+  .workItem:nth-child(2n+1){
+    --stagger: 0px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================
+   WORKS: one-time "shrink" on enter (Studio-like)
+========================== */
+
+
+
+
+/* ألغي تأثير الهوفر نهائيًا */
+#works .workItem img{
+  transition: none !important;
+  transform: none !important;
+}
+
+/* الوضع الطبيعي قبل ما نوصل للقسم */
+#works .workItem{
+  transform: translate3d(0, var(--stagger, 0px), 0) scale(1);
+  will-change: transform;
+  transition: transform 4000ms cubic-bezier(.22, 1, .36, 1);
+}
+
+/* أول ما القسم يصير ظاهر: يصغر ويثبت */
+#works.is-revealed .workItem{
+  transform: translate3d(0, var(--stagger, 0px), 0) scale(0.88);
+
+}
+
+
+
+/* اختياري: لو تبين تأثير أدق لكل صف (يتأخر شوي) */
+#works.is-revealed .workItem:nth-child(1){ transition-delay: 0ms; }
+#works.is-revealed .workItem:nth-child(2){ transition-delay: 60ms; }
+#works.is-revealed .workItem:nth-child(3){ transition-delay: 120ms; }
+#works.is-revealed .workItem:nth-child(4){ transition-delay: 180ms; }
+#works.is-revealed .workItem:nth-child(5){ transition-delay: 240ms; }
+#works.is-revealed .workItem:nth-child(6){ transition-delay: 300ms; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================
+   ARTICLES PAGE (SCOPED)
+========================== */
+
+.articlesPage{
+  padding: 80px 24px 90px;
+}
+
+.articlesWrap{
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
+
+.articlesTitle{
+  font-family: "Almarai", sans-serif;
+  margin: 0 0 10px;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 900;
+  text-align: right;
+}
+
+.articlesSub{
+     font-family: "Almarai", sans-serif;
+
+  margin: 0 0 26px;
+  text-align: right;
+  color: rgba(17,24,39,.72);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.articlesList{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.articleCard{
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 12px 30px rgba(0,0,0,.10);
+  border-radius: 16px;
+  padding: 18px;
+  text-align: right;
+}
+
+.articleMeta{
+     font-family: "Almarai", sans-serif;
+
+  font-size: 12px;
+  color: rgba(17,24,39,.55);
+  margin-bottom: 10px;
+}
+
+.articleHeading{
+     font-family: "Almarai", sans-serif;
+
+  margin: 0 0 10px;
+  font-size: clamp(18px, 2.2vw, 24px);
+  line-height: 1.35;
+  min-height: 2.8em; /* عشان مكان الكتابة ما يهتز */
+}
+
+.articleExcerpt{
+     font-family: "Almarai", sans-serif;
+
+  margin: 0 0 14px;
+  color: rgba(17,24,39,.75);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+
+
+.articleLink{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #111827;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.en{
+
+  direction: ltr;
+
+  unicode-bidi: isolate;
+
+  display: inline-block;
+
+}
+
+/* مؤشر صغير مثل زر */
+.articleLink::after{
+  content: "";
+  width: 10px;
+  height: 10px;
+  border: 2px solid currentColor;
+  border-left: 0;
+  border-bottom: 0;
+  transform: rotate(45deg);
+}
+
+/* الجوال */
+@media (max-width: 768px){
+  .articlesPage{ padding: 70px 16px 80px; }
+  .articlesList{ grid-template-columns: 1fr; gap: 14px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================
+   DETAILS (Accordion)
+========================== */
+
+.articlesDetails{
+     font-family: "Almarai", sans-serif;
+
+  margin-top: 22px;
+  display: grid;
+  gap: 16px;
+}
+
+/* الكرت (مقفول افتراضيًا) */
+.post{
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 12px 30px rgba(0,0,0,.10);
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(10px);
+
+  transition: max-height 900ms ease, opacity 450ms ease, transform 450ms ease;
+  will-change: max-height, opacity, transform;
+}
+
+/* المحتوى الداخلي */
+.postInner{
+ font-family: "Almarai", sans-serif;
+  position: relative;
+  padding: 18px;
+  text-align: right;
+}
+
+/* زر الإغلاق */
+.postClose{
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(0,0,0,0.10);
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* مفتوح */
+.post.is-open{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* مهم: تعويض الشريط العلوي عند السحب */
+.post{
+  scroll-margin-top: 110px;
+}
+
+/* عنوان / نص */
+.postTitle{
+  font-family: "Almarai", sans-serif;
+  margin: 10px 0 10px;
+  font-size: clamp(20px, 2.8vw, 30px);
+  line-height: 1.35;
+  min-height: 2.6em;
+}
+
+.postMeta{
+  font-size: 12px;
+  color: rgba(17,24,39,.55);
+  margin-bottom: 10px;
+}
+
+.postSub{
+  margin: 0 0 14px;
+  color: rgba(17,24,39,.70);
+  line-height: 1.9;
+}
+
+.postBody p{
+     font-family: "Almarai", sans-serif;
+
+  margin: 0 0 12px;
+  color: rgba(17,24,39,.82);
+  line-height: 2;
+  font-size: 16px;
+
+
+}
+
+
+
+/* ==========================
+   Lazy reveal
+========================== */
+.lazy-reveal{
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 800ms ease, transform 800ms ease;
+  will-change: opacity, transform;
+}
+.lazy-reveal.is-in{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 📱 */
+@media (max-width: 768px){
+  .postInner{ padding: 16px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============ INTRO SPLASH (SCOPED) ============ */
+.intro{
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  overflow: hidden;
+  background: #faf3eb; /* خلفية تبان حول الصورة لو صارت contain */
+}
+
+/* الصورة: "كاملة" على كل الشاشات */
+.intro__img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;     /* ✅ كاملة بدون قص */
+  object-position: center; /* ✅ بالوسط */
+  display: block;
+  z-index: 1;
+}
+
+/* الشقّين */
+.intro__split{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50vh;
+  background: #faf3eb;
+  z-index: 2;
+
+  /* ✅ بالبداية مخفيين (عشان "بعد ظهور الصورة") */
+  opacity: 0;
+  transform: translateY(0);
+  will-change: transform, opacity;
+}
+
+/* يبدأون من المنتصف */
+.intro__split--top{ top: 0; }
+.intro__split--bottom{ bottom: 0; }
+
+/* ✅ بعد ما نفعّل الشقّين */
+.intro.is-reveal-splits .intro__split{
+  opacity: 1;
+  transition: opacity 180ms ease;
+}
+
+/* ✅ فتح من النصف: العلوي يطلع لفوق والسفلي ينزل لتحت */
+.intro.is-open .intro__split--top{
+  transform: translateY(-100%);
+  transition: transform 900ms cubic-bezier(.2,.9,.2,1);
+}
+.intro.is-open .intro__split--bottom{
+  transform: translateY(100%);
+  transition: transform 900ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* اختفاء بعد الفتح */
+.intro.is-done{
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .intro.is-reveal-splits .intro__split,
+  .intro.is-open .intro__split--top,
+  .intro.is-open .intro__split--bottom,
+  .intro.is-done{
+    transition: none !important;
+  }
+}
+
+
+
+.intro{
+  background: #faf3eb;
+}
+
+.intro__img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* الصورة كاملة */
+  z-index: 2;
+}
+
+/* خلفية مموهة من نفس الصورة */
+.intro::before{
+  content:"";
+  position:absolute;
+  inset:0;
+background: url("./splash.jpg") center/cover no-repeat;
+  filter: blur(40px) brightness(.7);
+  transform: scale(1.1);
+  z-index:1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer{
+  padding: 60px 16px 40px;
+  background: #faf3eb;
+}
+
+.footer-social{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.social-row{
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+}
+
+.social-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;              /* 👈 لا فراغ */
+  background: none;        /* 👈 بدون مربع */
+  border-radius: 0;
+  transition: transform .2s ease, opacity .2s ease;
+}
+
+.social-btn:hover{
+  transform: scale(0.9);   /* 👈 تأثير ناعم */
+  opacity: 0.7;
+}
+
+/* حجم الأيقونة نفسها */
+.social-btn img{
+  width: 37px;             /* 👈 كبر/صغر من هنا */
+  height: auto;
+  display: block;
+}
+
+
+.footer-text{
+     font-family: "Almarai", sans-serif;
+
+  margin-top: 8px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.55);
+  text-align: center;
+}
+
+
+
+
+
+
+
+#about .aboutText{
+  display: block;          /* مهم */
+  max-width: 100%;
+  text-align: right;
+  flex-direction: column;
+  align-items: flex-start;
+
+  line-height: 1.8;        /* ترتيب جميل */
+  white-space: normal;     /* ❗ يكسر السطر */
+  word-break: normal;
+}
+
+#about .aboutText h2{
+  margin: 0 0 16px 0;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 800;
+}
+
+#about .aboutText p{
+     font-family: "Almarai", sans-serif;
+
+  margin: 0;
+  font-size: clamp(15px, 1.6vw, 18px);
+  color: #333;
+}
+
+
+
+
+/* ==========================
+   WORKS CONTAINER FIX
+========================== */
+#works{
+  width: min(3200px, 100%);
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* ==========================
+   GRID LAYOUT
+========================== */
+#works .worksGrid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  align-items: start;
+}
+
+/* ==========================
+   WORK ITEM
+========================== */
+#works .workItem{
+  display: block;
+  text-decoration: none;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.workItem{
+
+  text-decoration: none;
+
+  color: inherit;
+
+}
+/* ==========================
+   IMAGE (بدون قص)
+========================== */
+#works .workItem img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+/* ==========================
+   TEXT تحت الصورة
+========================== */
+.workInfo{
+  padding: 8px 0 0;
+  text-align: right;
+}
+
+.worksTitle {
+  text-align: center;
+}
+
+.workName{
+     font-family: "Almarai", sans-serif;
+
+  font-size: 18px;
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+
+.workDesc{
+     font-family: "Almarai", sans-serif;
+
+  font-size: 15px;
+  margin: 0;
+  color: #666;
+}
+
+/* ==========================
+   TABLET / SMALL LAPTOP
+========================== */
+@media (max-width: 1024px){
+  #works .worksGrid{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================
+   MOBILE (صورتين بالصف)
+========================== */
+@media (max-width: 768px){
+  #works{
+    padding: 0 12px;
+  }
+
+  #works .worksGrid{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  #works .workItem img{
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+
+
+
+/* الصفحة تكون على قد الصور */
+
+body{
+
+  margin: 0;
+
+}
+
+/* ===== الشريط ===== */
+
+.galleryStrip{
+
+  display: flex;
+
+  flex-direction: row;
+
+  gap: 8px;                 /* مسافة بين الصور */
+
+  overflow-x: auto;          /* سكرول أفقي */
+
+  overflow-y: hidden;
+
+  padding: 0;                /* بدون فراغ فوق وتحت */
+
+  margin: 0;
+
+  scroll-behavior: smooth;
+
+}
+
+/* يخفي شكل السكروول (اختياري) */
+
+.galleryStrip::-webkit-scrollbar{
+
+  display: none;
+
+}
+
+/* ===== الصور ===== */
+
+.galleryStrip img{
+
+  height: 400px;             /* حجم الصور */
+
+  width: auto;               /* عرض تلقائي */
+
+  object-fit: cover;
+
+  flex-shrink: 0;            /* يمنع تصغيرها */
+
+  border-radius: 12px;
+
+}
+
+
+
+
+
+
+
+
+
+
+/* إزالة الفراغات */
+
+body{
+
+  margin: 0;
+
+}
+
+/* الحاوية */
+
+.galleryWrap{
+
+  overflow: hidden;
+
+  width: 100%;
+
+  margin-bottom: 100px;
+
+}
+
+/* الشريط */
+
+.galleryTrack{
+
+  display: flex;
+
+  width: max-content;
+
+  animation: scrollLoop 25s linear infinite;
+
+}
+
+/* المجموعات */
+
+.set{
+
+  display: flex;
+
+  gap: 8px;
+
+}
+
+/* الصور */
+
+.galleryTrack img{
+
+  height: 350px;  
+ /* 👈 هنا تكبير الصور */
+
+  width: auto;
+
+  margin-right: 10px;
+
+  object-fit: cover;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+}
+
+/* الحركة */
+
+@keyframes scrollLoop{
+
+  0%{
+
+    transform: translateX(0);
+
+  }
+
+  100%{
+
+    transform: translateX(-33.333%);
+
+  }
+
+}
+
+
+
+@media (max-width: 768px){
+
+  .galleryTrack img{
+
+    height: 230px; /* 👈 أصغر في الجوال */
+
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+/* =======================================
+
+   FIX SPACING BETWEEN SECTIONS
+
+   (حط هذا آخر شي في الملف)
+
+======================================= */
+
+/* متغير موحد للمسافات */
+
+:root{
+
+  --section-space: 60px;
+
+}
+
+/* سكاشن عامة */
+
+.pageGeneric{
+
+  min-height: auto !important;
+
+  padding: var(--section-space) 24px !important;
+
+  align-items: flex-start !important;
+
+}
+
+/* صورة فقط */
+
+.image-only{
+
+  min-height: auto !important;
+
+  padding: var(--section-space) 24px !important;
+
+}
+
+/* الأعمال */
+
+.worksSection{
+
+  min-height: auto !important;
+
+  padding: var(--section-space) 24px !important;
+
+  align-items: flex-start !important;
+
+}
+
+/* المقالات */
+
+.articlesPage{
+
+  padding: var(--section-space) 24px !important;
+
+}
+
+/* الفوتر */
+
+.footer{
+
+  padding: var(--section-space) 16px 30px !important;
+
+}
+
+/* حل الفراغ الكبير (أهم نقطة) */
+
+.galleryWrap{
+
+  margin-bottom: var(--section-space) !important;
+  padding-top: calc(var(--section-space) - 5px) !important;
+
+}
+
+/* لو فيه سكاشن تستخدم flex وتسبب فراغ */
+
+.pageGeneric,
+
+.worksSection{
+
+  align-items: flex-start !important;
+
+}
+
+/* تحسين إضافي: منع أي مسافات غريبة */
+
+section{
+
+  margin: 0 !important;
+
+}
+
+/* 📱 الجوال */
+
+@media (max-width: 768px){
+
+  :root{
+
+    --section-space: 40px;
+
+  }
+
+  .pageGeneric,
+
+  .image-only,
+
+  .worksSection,
+
+  .articlesPage{
+
+    padding: var(--section-space) 16px !important;
+
+  }
+
+}
+
+
+
+
+
+
+/* =======================================
+
+   FIX RTL PUNCTUATION (ARTICLES ONLY)
+
+======================================= */
+
+/* تأكيد الاتجاه */
+
+#articlesPage,
+
+#articlesDetails{
+
+  direction: rtl;
+
+}
+
+/* النصوص داخل المقالات */
+
+#articlesPage .articleMeta,
+
+#articlesPage .articleExcerpt,
+
+#articlesPage .articleHeading,
+
+#articlesDetails .postMeta,
+
+#articlesDetails .postSub,
+
+#articlesDetails .postBody,
+
+#articlesDetails .postTitle{
+
+  direction: rtl;
+
+  text-align: right;
+
+  /* أهم سطرين */
+
+  unicode-bidi: isolate;
+
+  line-break: auto;
+
+}
+
+/* تحسين عرض علامات الترقيم */
+
+#articlesPage p,
+
+#articlesDetails p{
+
+  word-spacing: 0.05em;
+
+  letter-spacing: 0.01em;
+
+}
+
+/* يخلي الأقواس والنقاط ما تقفز */
+
+#articlesPage p::after,
+
+#articlesDetails p::after{
+
+  content: "";
+
+  unicode-bidi: isolate;
+
+}
+
+
+
+
+
+
+
+
+
+
+

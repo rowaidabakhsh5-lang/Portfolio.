@@ -1,0 +1,241 @@
+
+
+/* =========================
+   STUDIO HERO (SCOPED ONLY)
+   لا يؤثر على باقي الصفحة
+========================= */
+
+.studio-hero{
+  /* متغيرات خاصة بالسكشن فقط */
+  --tilt: 19deg;            /* ✅ الاتجاه المعاكس (زي استديو) */
+  --gapX: 18px;
+  --gapY: 18px;
+  --imgH: 520px;
+  --radius: 0px;
+
+  --speedUp: 18s;
+  --speedDown: 20s;
+
+  --bg: #0b0b0d;
+  --text: #f3f4f6;
+  --muted: rgba(243,244,246,.78);
+
+  position: relative;
+  height: 100vh;
+  min-height: 640px;
+  overflow: hidden;
+  background: var(--bg);
+  isolation: isolate;
+}
+
+/* الخلفية (الميلان) */
+.studio-hero .studio-bg{
+  position: absolute;
+  inset: -22%;
+  transform: rotate(var(--tilt));
+  z-index: -2;
+}
+
+/* الأعمدة */
+.studio-hero .studio-cols{
+  height: 150%;
+  display: flex;
+  gap: var(--gapX);
+  padding: 28px;
+}
+
+.studio-hero .studio-col{
+  flex: 0.65;
+  position: relative;
+  overflow: hidden;
+}
+
+.studio-hero .studio-col.mid{ flex: 0.65; }
+
+/* الماركي: نخليه يحتضن محتواه بدل inset:0 عشان حساب -50% يصير مضبوط */
+.studio-hero .marquee{
+  position: absolute;
+  left: 0; right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gapY);
+  will-change: transform;
+  transform: translate3d(0,0,0);
+}
+
+/* كتلة الصور */
+.studio-hero .track{
+  display: flex;
+  flex-direction: column;
+  gap: var(--gapY);
+}
+
+/* الصور */
+.studio-hero .track img{
+  width: 100%;
+  height: var(--imgH);
+  object-fit: cover;
+  border-radius: var(--radius);
+  outline: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 22px 70px rgba(0,0,0,.45);
+  display: block;
+}
+
+/* ==========================
+   ✅ بدون قفزة + بدون فراغ
+   نستخدم مقدار مسافة = (طول التراك الأول) بدل -50%
+   (ثابت لأنه عندك 3 صور فقط)
+========================== */
+
+.studio-hero{
+  --items: 3; /* عندك 3 صور في كل عمود */
+  --step: calc(var(--imgH) + var(--gapY));
+  --loop: calc((var(--items) * var(--step)) - var(--gapY));
+}
+
+/* عمود طالع */
+.studio-hero .studio-col.up .marquee{
+  animation: studioUp var(--speedUp) linear infinite;
+}
+/* عمود نازل */
+.studio-hero .studio-col.down .marquee{
+  animation: studioDown var(--speedDown) linear infinite;
+}
+
+@keyframes studioUp{
+  from{ transform: translate3d(0,0,0); }
+  to  { transform: translate3d(0, calc(-1 * var(--loop)), 0); }
+}
+@keyframes studioDown{
+  from{ transform: translate3d(0, calc(-1 * var(--loop)), 0); }
+  to  { transform: translate3d(0,0,0); }
+}
+
+/* التظليل */
+.studio-hero .studio-shade{
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(1200px 700px at 50% 40%, rgba(0,0,0,.20), rgba(0,0,0,.75)),
+    linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.90));
+}
+
+/* المحتوى */
+.studio-hero .studio-content{
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text);
+  padding: 0 16px;
+}
+
+.studio-hero .studio-content h1{
+  font-family: "Tajawal", sans-serif;
+  font-size: clamp(38px, 7vw, 72px);
+  margin: 0 0 14px;
+  line-height: 1.02;
+}
+
+.studio-hero .studio-content p{
+  font-family: "Tajawal", sans-serif;
+  max-width: 720px;
+  font-size: clamp(15px, 2.2vw, 19px);
+  margin: 0 0 28px;
+  color: var(--muted);
+}
+
+.studio-hero .studio-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: #fff;
+  color: #0b0b0d;
+  text-decoration: none;
+  font-weight: 800;
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.40);
+}
+
+.studio-hero .arrow{
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-left: 0;
+  border-bottom: 0;
+  transform: rotate(45deg);
+}
+
+
+
+
+
+
+
+
+/* 📱 الجوال */
+@media (max-width: 768px){
+
+  .studio-hero{
+    height: 70vh;          /* ✅ أقصر شوي */
+    min-height: 540px;
+    --imgH: 210px;         /* ✅ أقل ارتفاع */
+    --gapX: 14px;
+    --gapY: 14px;
+  }
+
+  /* نخلي الوسط أعرض عشان يبان طرف الجانبين */
+  .studio-hero .studio-cols{
+    width: 122%;
+    margin-left: -11%;
+    padding: 18px;
+  }
+  .studio-hero .studio-col{ flex: 0.85; }
+  .studio-hero .studio-col.mid{ flex: 1.5; }
+
+  /* تحديث loop للجوال لأن imgH/gapY تغيروا */
+  .studio-hero{
+    --step: calc(var(--imgH) + var(--gapY));
+    --loop: calc((var(--items) * var(--step)) - var(--gapY));
+  }
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .studio-hero .studio-col.up .marquee,
+  .studio-hero .studio-col.down .marquee{
+    animation: none;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

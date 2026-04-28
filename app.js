@@ -116,15 +116,15 @@ var items = [
 
   "url('2.jpeg')",
 
-  "url('./work/3.jpeg')",
+  "url('3.jpeg')",
 
-  "url('./work/4.jpeg')",
+  "url('4.jpeg')",
 
-  "url('./work/5.jpeg')",
+  "url('5.jpeg')",
 
-  "url('./work/6.jpeg')",
+  "url('6.jpeg')",
 
-  "url('./work/7.jpeg')",
+  "url('7.jpeg')",
 
 ];
 

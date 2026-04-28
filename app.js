@@ -112,9 +112,9 @@ window.addEventListener("DOMContentLoaded", function () {
 
 var items = [
 
-  "url('./work/1.jpeg')",
+  "url('1.jpeg')",
 
-  "url('./work/2.jpeg')",
+  "url('2.jpeg')",
 
   "url('./work/3.jpeg')",
 

@@ -276,10 +276,10 @@ body{
 
 #about.pageGeneric{
 
-  --aboutCardMinH:700px;
+  --aboutCardMinH:1080px;
 
   --aboutVideoW:800px;
-  --aboutVideoH:910px;
+  --aboutVideoH:1080px;
 
   background: rgb(250,243,235);
   position:relative;
@@ -367,7 +367,7 @@ body{
 @media (max-width:768px){
 
 #about.pageGeneric{
-  --aboutMobileVideoH:400px;
+  --aboutMobileVideoH:700px;
 }
 
 /* الكرت */
@@ -711,6 +711,7 @@ body{
   font-size: clamp(18px, 2.2vw, 24px);
   line-height: 1.35;
   min-height: 2.8em; /* عشان مكان الكتابة ما يهتز */
+  color:#e64329;
 }
 
 .articleExcerpt{
@@ -730,7 +731,7 @@ body{
   gap: 10px;
   padding: 10px 14px;
   border-radius: 12px;
-  background: #111827;
+  background: #e64329;
   color: #fff;
   text-decoration: none;
   font-weight: 800;
@@ -847,6 +848,8 @@ body{
   font-size: clamp(20px, 2.8vw, 30px);
   line-height: 1.35;
   min-height: 2.6em;
+  color:#e64329;
+  
 }
 
 .postMeta{
@@ -1101,6 +1104,127 @@ background: url("./splash.jpg") center/cover no-repeat;
   margin: 0;
   font-size: clamp(15px, 1.6vw, 18px);
   color: #333;
+
+  
+  text-align: justify;
+
+  text-align-last: right; /* آخر سطر عربي طبيعي */
+
+  line-height: 1.8;
+
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  word-spacing: 1px;
+}
+
+
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait){
+
+  #about{
+
+    display: flex;
+
+    flex-direction: column !important; /* النص فوق الفيديو */
+
+  }
+
+  .aboutCard{
+
+    width: 100%;
+
+  }
+
+  .aboutText{
+
+    width: 100%;
+
+    text-align: right;
+
+  }
+
+  .aboutVideo{
+
+    width: 100%;
+
+  }
+
+  .aboutVideo video{
+
+    width: 100%;
+
+    height: auto;
+
+  }
+
+}
+
+
+
+
+/* جوال */
+
+@media (max-width: 768px){
+
+  #about .aboutText p{
+
+    max-width: 100%;
+
+    padding: 10px 12px;
+
+    text-align: right;
+
+    padding: 0 16px;   /* 👈 يمنع الالتصاق */
+
+    max-width: 100%;
+
+     text-align: justify;
+
+  text-align-last: right; /* آخر سطر عربي طبيعي */
+
+  line-height: 1.8;
+
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  word-spacing: 1px;
+
+
+  }
+
+}
+
+
+
+.aboutImgDesktop{
+
+  display: none;
+
+}
+
+/* كمبيوتر فقط */
+
+@media (min-width: 1025px){
+
+  .aboutImgDesktop{
+
+    display: block;
+
+    width: 480px;        /* 👈 أكبر شوي */
+
+    height: auto;
+
+    margin: 75px auto 0; /* 👈 يوسّطها */
+
+    border-radius: 12px;
+
+  }
+
 }
 
 
@@ -1172,6 +1296,9 @@ background: url("./splash.jpg") center/cover no-repeat;
   font-size: 18px;
   margin: 0 0 4px;
   font-weight: 700;
+     padding: 0 8px;
+  line-height: 1.6;
+  color: #e64329;
 }
 
 .workDesc{
@@ -1180,6 +1307,12 @@ background: url("./splash.jpg") center/cover no-repeat;
   font-size: 15px;
   margin: 0;
   color: #666;
+   margin-bottom: 12px;
+  padding: 0 8px;
+  line-height: 1.6;
+  direction: rtl;
+
+  unicode-bidi: plaintext;
 }
 
 /* ==========================
@@ -1200,7 +1333,7 @@ background: url("./splash.jpg") center/cover no-repeat;
   }
 
   #works .worksGrid{
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 8px;
   }
 
@@ -1564,6 +1697,91 @@ section{
   content: "";
 
   unicode-bidi: isolate;
+
+}
+
+
+
+.galleryWrap {
+
+  overflow: hidden;
+
+  width: 100%;
+
+}
+
+.galleryTrack {
+
+  display: flex;
+
+  width: max-content;
+
+  animation: scroll 35s linear infinite;
+
+}
+
+.set {
+
+  display: flex;
+
+}
+
+
+
+/* الحركة */
+
+@keyframes scroll {
+
+  0% {
+
+    transform: translateX(0);
+
+  }
+
+  100% {
+
+    transform: translateX(-50%);
+
+  }
+
+}
+
+
+.set img {
+
+  width: 450px;        /* عرض المستطيل */
+
+  height: 350px;       /* ارتفاع المستطيل */
+
+  object-fit: cover;   /* أهم شيء عشان ما تتشوه الصورة */
+
+  margin-right: 10px;
+
+  border-radius: 10px;
+
+}
+
+@media (max-width: 768px) {
+
+  .set img {
+
+    width: 270px;      /* عرض أصغر للجوال */
+
+    height: 180px;     /* ارتفاع مناسب */
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+  }
+
+}
+
+
+
+.postTitle.type-words::after {
+
+  display: none !important;
 
 }
 

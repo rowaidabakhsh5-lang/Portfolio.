@@ -501,7 +501,7 @@ body{
   #about.pageGeneric{ min-height: auto; padding: 40px 16px; }
 
   #about .aboutVideo video{
-    height: 400px;
+    height: 1080px;
     min-height: 360px;
     max-height: 720px;
   }

@@ -634,3 +634,16 @@ function build(){
 
 
 
+
+
+// نخلي الكتابة تشتغل فقط على الكروت
+
+document.querySelectorAll('.postTitle.type-words').forEach(el => {
+
+  el.classList.remove('type-words');
+
+});
+
+
+
+

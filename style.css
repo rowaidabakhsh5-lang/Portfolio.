@@ -1803,6 +1803,69 @@ section{
 
 
 
+@media (max-width: 768px){
+  #about .aboutText p{
+    padding: 3px !important;
+    text-align: right !important;
+    text-align-last: right !important;
+    unicode-bidi: plaintext !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+  /* نلغي أي مسافات من العنصر نفسه */
+
+  .aboutText {
+
+    padding-right: 0 !important;
+
+    margin-right: 0 !important;
+
+  }
+
+  /* نلغي المسافات من أي أب يضغطه */
+
+  .aboutText,
+
+  .aboutText * {
+
+    box-sizing: border-box;
+
+  }
+
+  /* أهم سطر: نلغي أي padding من الحاوية */
+
+  .content,
+
+  .container,
+
+  .about,
+
+  .section {
+
+    padding-right: 0 !important;
+
+  }
+
+}
+
+
+
+
+
+
+
+
 
 
 

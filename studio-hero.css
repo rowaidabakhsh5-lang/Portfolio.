@@ -197,3 +197,56 @@
     animation: none;
   }
 }
+
+
+
+
+
+
+
+
+
+
+/* 📱 iPad (طولي + عرضي) نفس الشكل */
+
+@media (min-width: 768px) and (max-width: 1024px){
+
+  .studio-hero{
+
+    --imgH: 460px;   /* نفس الارتفاع في كل أوضاع الآيباد */
+
+    --gapX: 14px;
+
+    --gapY: 14px;
+
+  }
+
+  .studio-hero .studio-cols{
+
+    width: 122%;
+
+    margin-left: -11%;
+
+    padding: 18px;
+
+  }
+
+  .studio-hero .studio-col{
+
+    flex: 0.85;
+
+  }
+
+  .studio-hero .studio-col.mid{
+
+    flex: 1.5;
+
+  }
+
+  .studio-hero .track img{
+
+    object-fit: cover;
+
+  }
+
+}

@@ -1866,6 +1866,37 @@ section{
 
 
 
+@media (max-width: 768px) {
+
+  #about .aboutText p {
+
+    text-align: justify !important;
+
+    direction: rtl;
+
+    max-width: 100% !important;
+
+    margin: 0 !important;
+
+    padding: 0 10px !important;
+
+    line-height: 1.9;
+
+    /* 👇 هذا هو السر */
+
+    text-justify: inter-word;
+
+  }
+
+}
+
+
+
+
+
+
+
+
 
 
 

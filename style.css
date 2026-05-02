@@ -1867,27 +1867,36 @@ section{
 
 
 @media (max-width: 768px) {
-
-  #about .aboutText p {
-
-    text-align: justify !important;
-
+  .aboutText {
     direction: rtl;
-
-    max-width: 100% !important;
-
-    margin: 0 !important;
-
-    padding: 0 10px !important;
-
+    text-align: right !important;
+    max-width: 100%;
+    margin: 0;
+    padding-right: 3px;
+    padding-left: 8px;
     line-height: 1.9;
-
-    /* 👇 هذا هو السر */
-
-    text-justify: inter-word;
-
+    word-spacing: 0.5px;
   }
 
+  .aboutText p {
+    text-align: right !important;
+    text-align-last: right !important;
+    hyphens: auto !important;
+    word-break: break-word !important;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .aboutText p {
+    text-align: justify !important;
+    text-align-last: right !important;
+    direction: rtl !important;
+    hyphens: auto !important;
+    word-break: break-word !important;
+    padding: 0 6px;
+  }
 }
 
 

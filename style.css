@@ -1916,36 +1916,118 @@ section{
 
 
 /* ==========================
-   ABOUT (TABLET - portrait & landscape)
+
+   ABOUT (TABLET - iPad)
+
 ========================== */
-@media (max-width: 1024px) {
-  #about.pageGeneric .aboutCard {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    gap: 22px;
-    min-height: auto;
-  }
 
-  #about .aboutText {
-    width: 100%;
-    margin: 0;
-    max-width: 100%;
-  }
+@media (min-width:769px) and (max-width:1024px){
 
-  #about .aboutVideo {
-    position: static;
-    width: 100%;
-    height: 500px;
-    border-radius: 12px;
-    overflow: hidden;
-  }
+#about.pageGeneric{
 
-  #about .aboutVideo video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  --aboutTabletCardPad: 30px;
+
+}
+
+/* الكرت */
+
+#about.pageGeneric .aboutCard{
+
+  display:flex;
+
+  flex-direction:column;
+
+  width:100%;
+
+  margin:0 30px; /* فراغ من الجنبين */
+
+  padding: var(--aboutTabletCardPad);
+
+  gap:30px;
+
+  min-height:auto;
+
+}
+
+/* النص */
+
+#about .aboutText{
+
+  width:100%;
+
+  max-width:100%;
+
+  text-align:right;
+
+  margin:0;
+
+}
+
+/* الفيديو */
+
+#about .aboutVideo{
+
+  position:static;
+
+  width:100%;
+
+  height:auto;              /* 👈 يمنع القص */
+
+  border-radius:16px;
+
+  overflow:hidden;
+
+  background:#000;          /* شكل أنظف */
+
+}
+
+/* الفيديو نفسه */
+
+#about .aboutVideo video{
+
+  width:100%;
+
+  height:auto;              /* 👈 أهم شيء */
+
+  display:block;
+
+  object-fit:contain;       /* يعرض كامل */
+
+}
+
+}
+
+
+
+
+
+
+@media (min-width:1025px){
+
+/* ننزل النص */
+
+#about .aboutText{
+
+  margin-top: 30px; /* 👈 تحكم بالمستوى */
+
+}
+
+/* إذا عندك صورة داخل النص */
+
+#about .aboutText img{
+
+  margin-top: 90px; /* 👈 مسافة بين النص والصورة */
+
+}
+
+/* أو إذا الصورة عنصر منفصل */
+
+#about .aboutImage{
+
+  margin-top: 20px;
+
+}
+
 }
 
 

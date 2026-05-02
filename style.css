@@ -1215,7 +1215,7 @@ background: url("./splash.jpg") center/cover no-repeat;
 
     display: block;
 
-    width: 480px;        /* 👈 أكبر شوي */
+    width: 100px;        /* 👈 أكبر شوي */
 
     height: auto;
 

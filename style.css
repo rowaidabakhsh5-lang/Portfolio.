@@ -1215,7 +1215,7 @@ background: url("./splash.jpg") center/cover no-repeat;
 
     display: block;
 
-    width: 110px;        /* 👈 أكبر شوي */
+    width: 130px;        /* 👈 أكبر شوي */
 
     height: auto;
 
@@ -2016,7 +2016,7 @@ section{
 
 #about .aboutText img{
 
-  margin-top: 110px; /* 👈 مسافة بين النص والصورة */
+  margin-top: 130px; /* 👈 مسافة بين النص والصورة */
 
 }
 

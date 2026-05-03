@@ -1940,6 +1940,22 @@ section{
 
 
 
+@media (max-width: 768px) {
+
+  .aboutText {
+
+    padding-right: 2px !important;
+
+  }
+
+}
+
+
+
+
+
+
+
 
 
 

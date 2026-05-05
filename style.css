@@ -1959,6 +1959,59 @@ section{
 
 
 
+@media only screen 
+
+  and (min-width: 768px) 
+
+  and (max-width: 1024px) 
+
+  and (orientation: portrait) {
+
+  .about,
+
+  .aboutCard
+
+  {
+
+    width: calc(100% - 40px) !important;
+
+    margin-left: auto !important;
+
+    margin-right: auto !important;
+
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== ABOUT - iPad Landscape ===== */
+@media (min-width: 769px) and (max-width: 1366px) and (orientation: landscape) {
+  #about .aboutVideo {
+    top: 0;
+    bottom: 0;
+    height: 100%;
+  }
+}
+
+
+
+
+
+
+
 
 
 

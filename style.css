@@ -1920,7 +1920,7 @@ section{
 
 #about .aboutText img{
 
-  margin-top: 100px; /* 👈 مسافة بين النص والصورة */
+  margin-top: 120px; /* 👈 مسافة بين النص والصورة */
 
 }
 
@@ -2060,7 +2060,7 @@ section{
 
   max-width: 900px;
 
-  margin: 100px auto 0;
+  margin: 120px auto 0;
 
   padding-inline: 12px;
 
@@ -2107,7 +2107,7 @@ section{
 
     display: block;
 
-    width: 350px;        /* 👈 أكبر شوي */
+    width: 320px;        /* 👈 أكبر شوي */
 
     height: auto;
 

@@ -2101,5 +2101,32 @@ section{
 
 
 
+@media (min-width: 1025px){
+
+  .aboutImgDesktop{
+
+    display: block;
+
+    width: 270px;        /* 👈 أكبر شوي */
+
+    height: auto;
+
+    margin: 75px auto 0; /* 👈 يوسّطها */
+
+    border-radius: 12px;
+
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
 
 

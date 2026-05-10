@@ -2152,6 +2152,8 @@ and (orientation: landscape) {
 
     line-height: 1.9 !important;
 
+    font-size: 25px;
+
   }
 
 }
